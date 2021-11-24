@@ -48,10 +48,10 @@ function gameStart() {
         // Appendo cella 
         grid.appendChild(createdCell);
     }
-  
+
 }
 
-
+// test 
 
 
 // ---------
