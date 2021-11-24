@@ -57,6 +57,7 @@ select {
 /* Main  */
 main {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -71,6 +72,7 @@ main {
     flex-direction: row;
     flex-wrap: wrap;
     align-content: flex-start;
+    justify-content: center;
 }
 
 .cell {
@@ -78,6 +80,7 @@ main {
     justify-content: center;
     align-items: center;
     border: 2px solid black;
+    cursor: pointer;
 }
 
 
@@ -86,6 +89,22 @@ main {
 }
 
 .cell.clicked {
-    background-color: rebeccapurple;
+    background-color: lightskyblue;
     color: white;
+}
+
+.cell.bomb {
+    background-color: red;
+    color: white;
+}
+
+#result-container {
+
+}
+
+.hidden {
+    display: none;
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: bold;  
 }

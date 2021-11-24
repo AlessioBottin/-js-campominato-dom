@@ -33,11 +33,11 @@
 // [x] al click:
 //              [x] se il numero cliccato è presente nella lista delle bombsArray
 //                 - [x] do alla cella classe bomb (colore rosso) 
-//                 - [] termino la partita con una funzione endGame
+//                 - [x] termino la partita con una funzione endGame
 //              [x] altrimenti la cella si colora di azzurro e la cella non è più cliccabile
 //                 - [x] inserisco il numero in un array di rightAttempts
 //                       se la lunghezza di rightAttempts = maxRightAttempts
-//                      - [] termina la partita con una funzione endGame
+//                      - [x] termina la partita con una funzione endGame
 
 
 
@@ -55,7 +55,7 @@ function gameStart() {
     grid.innerHTML = '';
 
     // imposto il numero di bombe 
-    let generatedBombsNumber = 1;
+    let generatedBombsNumber = 16;
 
     // Cambio il numero di celle in base alla difficoltà 
     switch (gameDifficulty) {
