@@ -30,15 +30,14 @@
 // [x] imposto il numero di bombe generatedBombsNumber
 // [x] imposto il numero di maxRightAttempts 
 // [x] Genero l'array di 16 numeri casuali e diversi compresi tra 1 e generatedCellsNumber: le bombe 
-// [] al click:
-//              [] se il numero cliccato è presente nella lista delle bombsArray
-//                 - [] do alla cella classe bomb (colore rosso) 
+// [x] al click:
+//              [x] se il numero cliccato è presente nella lista delle bombsArray
+//                 - [x] do alla cella classe bomb (colore rosso) 
 //                 - [] termino la partita con una funzione endGame
-//              [] altrimenti la cella si colora di azzurro e la cella non è più cliccabile
-//                 - [] inserisco il numero in un array di rightAttempts
-
-//   se la lunghezza di rightAttempts = generatedCellsNumber - genereatedBombsNumber (16) (maxRightAttempts)
-//     - [] termina la partita con una funzione endGame
+//              [x] altrimenti la cella si colora di azzurro e la cella non è più cliccabile
+//                 - [x] inserisco il numero in un array di rightAttempts
+//                       se la lunghezza di rightAttempts = maxRightAttempts
+//                      - [] termina la partita con una funzione endGame
 
 
 
@@ -56,11 +55,8 @@ function gameStart() {
     grid.innerHTML = '';
 
     // imposto il numero di bombe 
-    let generatedBombsNumber = 16;
+    let generatedBombsNumber = 1;
 
-    // imposto il numero di maxRightAttempts 
-    let maxRightAttempts = generatedCellsNumber - generatedBombsNumber;
-    
     // Cambio il numero di celle in base alla difficoltà 
     switch (gameDifficulty) {
         case 'easy':
@@ -75,19 +71,12 @@ function gameStart() {
         default:
     }
 
+    // imposto il numero di maxRightAttempts in base alla dificoltà
+    let maxRightAttempts = generatedCellsNumber - generatedBombsNumber;
+    console.log(maxRightAttempts); // test
+
     // Genero l' array di numeri casuali e diversi 
     const rndNumbersArray = getRndNumbersArray(generatedCellsNumber);
-
-    // Genero l'array di 16 numeri casuali e diversi compresi tra 1 e generatedCellsNumber: le bombe 
-    const bombsArray = [];
-
-    while ( bombsArray.length < generatedBombsNumber ) {
-        let genereatedBomb = getRndInteger(1, generatedCellsNumber);
-
-        if ( !bombsArray.includes(genereatedBomb) ) {
-            bombsArray.push(genereatedBomb);
-        }
-    }
 
     // Per ogni numero genero una cella e la appendo al div che la contiene
     for ( i = 0; i < rndNumbersArray.length; i++ ) {
@@ -101,8 +90,24 @@ function gameStart() {
 
         // Appendo cella 
         grid.appendChild(createdCell);
-    }   
-   
+    } 
+    
+    // Genero l'array di 16 numeri casuali e diversi compresi tra 1 e generatedCellsNumber: le bombe 
+    const bombsArray = [];
+
+    while ( bombsArray.length < generatedBombsNumber ) {
+        let genereatedBomb = getRndInteger(1, generatedCellsNumber);
+
+        if ( !bombsArray.includes(genereatedBomb) ) {
+            bombsArray.push(genereatedBomb);
+        }
+    }
+    
+    // Genero l' array di rightAttempts 
+    const rightAttempts = [];
+
+    console.log(rightAttempts); // test
+    console.log(bombsArray); //test
     
     // DOM SPECIFIC FUNCTIONS 
     // al click:
@@ -111,11 +116,27 @@ function gameStart() {
         const clickedNumber = parseInt(this.querySelector('span').textContent);
    
         if ( bombsArray.includes(clickedNumber) ) {
-        // do alla cella classe bomb (colore rosso) 
-        this.classList.add('bomb');
+            // do alla cella classe bomb (colore rosso) 
+            this.classList.add('bomb');
+
+            // termino la partita con una funzione endGame
+            alert('il gioco è finito');
+
+        } else {
+            // altrimenti la cella si colora di azzurro e la cella non è più cliccabile 
+            this.classList.add('clicked');
+            this.style.pointerEvents = "none";
+            // inserisco il numero in un array di rightAttempts 
+            rightAttempts.push(clickedNumber);
+            console.log(rightAttempts);
+
+            // se la lunghezza di rightAttempts = maxRightAttempts 
+            if ( rightAttempts.length === maxRightAttempts) {
+                alert('il gioco è finito hai vinto');
+            }
+        }
     }
 }
-} // ATTENZIONE DA CHIEDERE AD ALE O OLGA: devo aggiungere questa grafa se no dà unexpected end of input a fine programma 
 
 
 // ---------
