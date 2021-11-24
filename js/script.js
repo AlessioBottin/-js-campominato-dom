@@ -109,6 +109,27 @@ function gameStart() {
     console.log(rightAttempts); // test
     console.log(bombsArray); //test
     
+    function endGame(result) {
+        
+        // Genero un h2 che contiene il risultato 
+        const resultContainer = createH2();
+        let resultMessage;
+        const mainContainer = document.getElementById('main-container');
+
+        if ( result === 'lose') {
+            // Rendo visibile il messaggio del risultato levando la classe hidden
+            resultContainer.classList.remove('hidden');
+            resultMessage = resultContainer.innerHTML = `Hai perso, il tuo punteggio è: ${rightAttempts.length}, riprova...`
+            mainContainer.innerHTML += resultMessage;
+        } else {
+            // Rendo visibile il messaggio del risultato levando la classe hidden
+            resultContainer.classList.remove('hidden');
+            resultMessage = resultContainer.innerHTML = `Hai vinto!`
+            mainContainer.innerHTML += resultMessage;
+        } 
+       
+    }
+
     // DOM SPECIFIC FUNCTIONS 
     // al click:
     function handleCellClick() {
@@ -120,28 +141,39 @@ function gameStart() {
             this.classList.add('bomb');
 
             // termino la partita con una funzione endGame
-            alert('il gioco è finito');
+            endGame('lose');
 
         } else {
             // altrimenti la cella si colora di azzurro e la cella non è più cliccabile 
             this.classList.add('clicked');
             this.style.pointerEvents = "none";
+
             // inserisco il numero in un array di rightAttempts 
             rightAttempts.push(clickedNumber);
-            console.log(rightAttempts);
 
             // se la lunghezza di rightAttempts = maxRightAttempts 
             if ( rightAttempts.length === maxRightAttempts) {
-                alert('il gioco è finito hai vinto');
+                endGame('win');
             }
         }
     }
+
+    
 }
 
 
 // ---------
 // FUNCTIONS 
 // ---------
+
+
+// Genera un h2 in cui inserire un testo con classe hidden
+function createH2() {
+    const h2Container = document.createElement('h2');
+    h2Container.classList.add('hidden');
+    return h2Container;
+}
+
 
 // Genera un div con all' interno uno span e un numero
 // number --> numero che voglio dare allo span 
