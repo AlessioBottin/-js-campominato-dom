@@ -114,18 +114,17 @@ function gameStart() {
         // Genero un h2 che contiene il risultato 
         const resultContainer = createH2();
         let resultMessage;
-        const mainContainer = document.getElementById('main-container');
 
         if ( result === 'lose') {
             // Rendo visibile il messaggio del risultato levando la classe hidden
             resultContainer.classList.remove('hidden');
             resultMessage = resultContainer.innerHTML = `Hai perso, il tuo punteggio è: ${rightAttempts.length}, riprova...`
-            mainContainer.innerHTML += resultMessage;
+            grid.innerHTML += resultMessage;
         } else {
             // Rendo visibile il messaggio del risultato levando la classe hidden
             resultContainer.classList.remove('hidden');
             resultMessage = resultContainer.innerHTML = `Hai vinto!`
-            mainContainer.innerHTML += resultMessage;
+            grid.innerHTML += resultMessage;
         } 
        
     }
@@ -142,6 +141,17 @@ function gameStart() {
 
             // termino la partita con una funzione endGame
             endGame('lose');
+
+            // Bonus 
+            // Per ogni cella se il numero al suo interno è incluso in bombsArray aggiungo la classe bomb 
+            for ( i = 0; i < generatedCellsNumber; i++ ) {
+                const cellArray = document.getElementsByClassName('cell');
+                thisCell = cellArray[i];
+
+                if ( bombsArray.includes(parseInt(thisCell.querySelector('span').textContent))); {
+                    thisCell.classList.add('bomb');
+                }
+            }
 
         } else {
             // altrimenti la cella si colora di azzurro e la cella non è più cliccabile 

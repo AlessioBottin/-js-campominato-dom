@@ -98,13 +98,12 @@ main {
     color: white;
 }
 
-#result-container {
-
+h2 {
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: bold;
 }
 
 .hidden {
-    display: none;
-    margin-top: 20px;
-    font-size: 25px;
-    font-weight: bold;  
+    display: none;  
 }
